@@ -1,0 +1,11 @@
+process.env.NODE_ENV = "test";
+process.env.PORT = "3001";
+process.env.MONGODB_URI = process.env.MONGODB_URI ?? "mongodb://localhost:27017/zorvyn_backend_test";
+process.env.JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET ?? "test_access_secret_1234567890";
+process.env.JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET ?? "test_refresh_secret_1234567890";
+process.env.JWT_ACCESS_EXPIRES_IN = process.env.JWT_ACCESS_EXPIRES_IN ?? "15m";
+process.env.JWT_REFRESH_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN ?? "7d";
+process.env.RATE_LIMIT_WINDOW_MS = process.env.RATE_LIMIT_WINDOW_MS ?? "900000";
+process.env.RATE_LIMIT_MAX_REQUESTS = process.env.RATE_LIMIT_MAX_REQUESTS ?? "10000";
+process.env.BCRYPT_ROUNDS = process.env.BCRYPT_ROUNDS ?? "10";
+process.env.CORS_ORIGIN = process.env.CORS_ORIGIN ?? "*";

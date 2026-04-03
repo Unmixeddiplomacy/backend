@@ -1,0 +1,28 @@
+import { NextFunction, Request, Response } from "express";
+import { ZodTypeAny } from "zod";
+import { BadRequestError } from "../errors/HttpErrors";
+
+interface ValidationSchemas {
+  body?: ZodTypeAny;
+  query?: ZodTypeAny;
+  params?: ZodTypeAny;
+}
+
+export const validate = (schemas: ValidationSchemas) => {
+  return (req: Request, _res: Response, next: NextFunction): void => {
+    try {
+      if (schemas.body) {
+        req.body = schemas.body.parse(req.body);
+      }
+      if (schemas.query) {
+        req.query = schemas.query.parse(req.query) as Request["query"];
+      }
+      if (schemas.params) {
+        req.params = schemas.params.parse(req.params) as Request["params"];
+      }
+      next();
+    } catch (error: unknown) {
+      next(new BadRequestError("Validation failed", error));
+    }
+  };
+};
