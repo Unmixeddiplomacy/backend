@@ -155,6 +155,39 @@ npm run build
 npm start
 ```
 
+## Vercel Deployment
+
+This backend is configured for Vercel serverless deployment.
+
+Files used for deployment:
+
+- vercel.json
+- api/index.ts
+
+Deployment steps:
+
+1. Push repository to GitHub.
+2. Import project in Vercel.
+3. In Vercel Project Settings -> Environment Variables, set all variables from .env.example.
+4. Deploy.
+
+Important environment setup for Vercel:
+
+- NODE_ENV=production
+- CORS_ORIGIN must be your frontend URL, for example https://your-frontend.vercel.app
+- JWT_ACCESS_SECRET and JWT_REFRESH_SECRET must be real strong secrets (not placeholders)
+- MONGODB_URI should point to MongoDB Atlas database
+
+MongoDB Atlas requirements:
+
+- Add Vercel access in Network Access (commonly 0.0.0.0/0 for serverless platforms, restricted by strong DB user credentials)
+- Use dedicated DB user with least required permissions
+
+Post-deploy endpoints:
+
+- https://<your-backend-domain>/api/health
+- https://<your-backend-domain>/api-docs
+
 ## Environment Variables
 
 See .env.example for full list.
@@ -168,6 +201,8 @@ Required:
 - JWT_REFRESH_EXPIRES_IN
 - BCRYPT_ROUNDS
 - CORS_ORIGIN
+
+Do not commit real secrets in .env. Configure secrets only in Vercel Environment Variables.
 
 ## Seed Data
 
