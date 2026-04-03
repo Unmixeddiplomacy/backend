@@ -34,6 +34,19 @@ export class App {
   }
 
   private configureRoutes(): void {
+    this.instance.get("/", (_req, res) => {
+      res.status(200).json({
+        success: true,
+        message: "Finance backend is running",
+        docs: "/api-docs",
+        health: "/api/health"
+      });
+    });
+
+    this.instance.get("/health", (_req, res) => {
+      res.status(200).json({ success: true, message: "API healthy" });
+    });
+
     setupSwagger(this.instance);
     this.instance.use("/api", apiRouter);
   }

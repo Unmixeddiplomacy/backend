@@ -23,7 +23,7 @@ export class Database {
       cached.promise = mongoose
         .connect(env.MONGODB_URI, {
           maxPoolSize: 20,
-          serverSelectionTimeoutMS: 10000
+          serverSelectionTimeoutMS: 30000
         })
         .then((connection) => {
           Logger.info("MongoDB connected");
